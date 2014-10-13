@@ -1,3 +1,4 @@
+                        //imports all of the librarys necissary to play music
 import ddf.minim.spi.*;
 import ddf.minim.signals.*;
 import ddf.minim.*;
@@ -7,7 +8,7 @@ import ddf.minim.effects.*;
 
 AudioPlayer player;
 Minim minim;
-
+                  //all of the variable used to control the code
 int score;
 int aiscore;
 float xspeed  =0;
@@ -25,11 +26,11 @@ float aispeed =6;
 
 void setup(){
   minim = new Minim(this);
-  player = minim.loadFile("Radioactive (8-Bit NES Remix).mp3");
-  player.play();
+  player = minim.loadFile("Radioactive (8-Bit NES Remix).mp3");       //loads the music file
+  player.play();//begins playing the file
   
   
-  size(800,700);
+  size(800,700);//sets screen size
 
   background(100,25,100);
   ellipseMode(RADIUS);
@@ -49,38 +50,38 @@ void draw(){
   text(score,770,30);
   smooth();
   color(250,50,0);
-  rect(20,aipaddleY-100,20,200,5);
-  rect(width-30,mouseY-100,20,200,5);
+  rect(20,aipaddleY-100,20,200,5);        //creates the ai paddle
+  rect(width-30,mouseY-100,20,200,5);     //creates your paddle controlled by the position of your mouse
 xpos=xpos+(xspeed*xdirection);
 ypos=ypos+(yspeed*ydirection);
 if(xpos<40 && ypos<aipaddleY+100 && ypos>aipaddleY-100){
 xdirection*=-1;
 
 }
-if(aipaddleY<ypos){
+if(aipaddleY<ypos){//controls the position of the ai paddle
   aipaddleY=aipaddleY+10;
 }
 if(aipaddleY>ypos){
   aipaddleY=aipaddleY-10;
 }
 
-if (ypos>(height/1)-20||ypos<(height/height)+20){
+if (ypos>(height/1)-20||ypos<(height/height)+20){     //causes the ball to bounce when it contacts the top or bottom
   ydirection*=-1;
 }
 
-if(xpos>=width-40 && ypos>mouseY-100 && ypos<mouseY+100){
+if(xpos>=width-40 && ypos>mouseY-100 && ypos<mouseY+100){         //causes the ball to bounce of the paddles
 xdirection*=-1;
 
 }
 ellipse(xpos,ypos,rad,rad);
-if(xpos>width){
+if(xpos>width){         // adds score for ai
   xpos=width/2;
   ypos=height/2;
   xspeed=0;
   yspeed=0;
   aiscore=aiscore+1;
 }
-if(xpos<0){
+if(xpos<0){         //adds score for human
   xpos=width/2;
   ypos=height/2;
   xspeed=0;
@@ -97,7 +98,7 @@ if(xpos<0){
     text("You win",height/2,width/2-100);
   }
 }
-void mousePressed(){
+void mousePressed(){            //game start function
   xspeed = random(10,15);
   yspeed=random(10,15);
 }
